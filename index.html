@@ -9,82 +9,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <title>What's the Word?</title>
 </head>
-
 <body>
-    <button>High Scores</button>
-    <button>Light/Dark Mode</button>
 
-    <h1>What's the Word?</h1>
-
-    <h2>Timer:</h2>
-
-    <div class="container">
-    <div class="grid">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
-    </div>
+    <div class="game-container">
+        <div class="title-container">
+            <h1>What's the Word?</h1>
+            <nav>
+                <div id="highscore"></div>
+                <div id="timer"></div>
+            </nav>
+        </div>
+        <div class="message-container"></div>
+        <div class="tile-container"></div>
+        <div class="key-container"></div>
     </div>
 
-    <div class="keyboard">
-        <!-- <section id="row-1"></section> -->
-            <button class="key" data-key="Q">Q</button>
-            <button class="key" data-key="W">W</button>
-            <button class="key" data-key="E">E</button>
-            <button class="key" data-key="R">R</button>
-            <button class="key" data-key="T">T</button>
-            <button class="key" data-key="Y">Y</button>
-            <button class="key" data-key="U">U</button>
-            <button class="key" data-key="I">I</button>
-            <button class="key" data-key="O">O</button>
-            <button class="key" data-key="P">P</button>
-        <!-- <section id="row-2"></section> -->
-            <button class="key" data-key="A">A</button>
-            <button class="key" data-key="S">S</button>
-            <button class="key" data-key="D">D</button>
-            <button class="key" data-key="F">F</button>
-            <button class="key" data-key="G">G</button>
-            <button class="key" data-key="H">H</button>
-            <button class="key" data-key="J">J</button>
-            <button class="key" data-key="K">K</button>
-            <button class="key" data-key="L">L</button>
-        <section id="row-3"></section>
-            <button class="key" id="enter">ENTER</button>
-            <button class="key" data-key="Z">Z</button>
-            <button class="key" data-key="X">X</button>
-            <button class="key" data-key="C">C</button>
-            <button class="key" data-key="V">V</button>
-            <button class="key" data-key="B">B</button>
-            <button class="key" data-key="N">N</button>
-            <button class="key" data-key="M">M</button>
-            <button class="key" id="backspace">BACKSPACE</button>
-
-    </div>
-    <script src="./assets/js/script.js"></script>
+     <script src="./assets/js/script.js"></script>
 </body>
 </html>

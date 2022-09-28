@@ -1,71 +1,66 @@
 * {
-    font-family: 'Bebas Neue', cursive;
+  color: #ffffff;  
+  font-family: 'Bebas Neue', cursive;
 }
 
-.box {
-    width:50px;
-    height:50px;
+body {
+  background-color: #121213;
 }
 
-.grid {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    flex-grow: 1;
-    grid-template-columns: repeat(4, 4em);
-    grid-template-rows: repeat(6, 4em);
-    gap: .25em;
-    margin-bottom: 10em;
-  }
+.game-container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .container {
-    position: fixed;
-    top: 10vh;
-    left: 50vw;
-    transform: translateX(-50%);
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.title-container {
+  text-align: center;
+  width: 510px;
+  border-bottom: solid 1px #3a3a3c;
+}
 
-  .keyboard {
-    display: grid;
-    grid-template-columns: repeat(20, minmax(3em, 1.25em));
-    grid-auto-rows: 3em;
-    gap: .25em;
-    justify-content: center;
-  }
-  
-  .key {
-    font-size: inherit;
-    grid-column: span 2;
-    border: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: hsl(
-      var(--hue, 200),
-      var(--saturation, 1%),
-      calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
-    );
-    color: white;
-    fill: white;
-    text-transform: uppercase;
-    border-radius: .25em;
-    cursor: pointer;
-    user-select: none;
-  }
+.tile-container {
+  width: 330px;
+  margin-bottom: 30px;
+}
 
-  #row1 {
-    
-  }
+.key-container {
+  width: 510px;
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  #row2 {
+.key-container button {
+  width: 43px;
+  height: 58px;
+  border-radius: 4px;
+  border: none;
+  background-color: #818384;
+  margin: 4px;
+}
 
-  }
+.key-container button:nth-child(11) {
+  margin-left: 30px;
+}
 
-  #row3 {
-    justify-content:center;
-  }
+.key-container button:nth-child(20),
+.key-container button:nth-child(28) {
+  width: 68px;
+}
+
+.tile-container div {
+  display: flex;
+}
+
+.tile-container .tile {
+  width: 62px;
+  height: 62px;
+  border: 2px solid#3a3a3c;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+}
