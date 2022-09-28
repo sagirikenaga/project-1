@@ -17,10 +17,18 @@
 
     <div class="game-container">
         <div class="title-container" >
-            <h1 class="has-text-centered">What's the Word?</h1>
-            <nav class="is-inline-flex">
-                <button id="highscore" class="is-align-self-flex-start">High Scores</button>
-                <p id="timer" class="is-align-self-flex-end"></p>
+            <h1 class="has-text-centered is-size-1">What's the Word?</h1>
+            <nav class="is-inline">
+                <button id="highscore" class="has-text-left-desktop">View High Scores</button>
+                    <!-- <div id="highscore-modal">
+                        <p></p>
+                        <span class="highscore-close">X</span>
+                    </div> -->
+                <p id="timer" class="has-text-right-desktop"></p>
+                    <div id="time-modal">
+                        <h2 class="is-size-2 has-text-white has-text-weight-bold is-vcentered">Sorry! Time's up. Please try again :-)</h2>
+                        <span class="modal-close">X</span>
+                    </div>
             </nav>
         </div>
         <div class="message-container"></div>
