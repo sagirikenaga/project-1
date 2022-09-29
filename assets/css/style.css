@@ -135,7 +135,8 @@ body {
   font-weight:bold;
 }
 
-#highscore {
+#highscore,
+#src-btn {
   background-color:#121213;
   font:white;
   border:none;
@@ -149,6 +150,10 @@ button#highscore:hover {
 }
 
 .score-modal-close:hover {
+  cursor:pointer;
+}
+
+button#src-btn:hover {
   cursor:pointer;
 }
 
@@ -179,4 +184,9 @@ button#highscore:hover {
 .green-overlay {
   background-color: #538d4e !important;
   border:none !important;
+}
+
+footer {
+  padding-top:3%;
+  text-align:center;
 }
