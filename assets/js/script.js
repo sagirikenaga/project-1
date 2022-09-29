@@ -123,7 +123,7 @@ const showMessage = (message) => {
 
 //timer
 var timeEl = document.querySelector("#timer");
-var secondsLeft = 60;
+var secondsLeft = 5;
 var timeModalEl = document.getElementById("time-modal")
 var modalCloseEl = document.querySelector(".modal-close");
 
@@ -149,6 +149,20 @@ function setTime() {
   };
 
  setTime();
+
+ //high score modal 
+
+ var scoreModalEl = document.getElementById("highscore-modal");
+ var scoreCloseEl = document.querySelector(".score-modal-close");
+ var scoreButtonEl = document.getElementById("highscore");
+
+ scoreButtonEl.addEventListener ('click',function() {
+  scoreModalEl.style.display="block";
+});
+
+scoreCloseEl.addEventListener('click',function() {
+  scoreModalEl.style.display="none";
+});
   
 // first API
 
