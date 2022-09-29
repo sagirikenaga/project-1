@@ -65,7 +65,7 @@ keys.forEach(key => {
     buttonElement.setAttribute('id', key)
     buttonElement.addEventListener('click', () => handleClick(key))
     keyboard.append(buttonElement)
-})
+});
 
 const handleClick = (letter) => {
     console.log('clicked', letter)
@@ -124,27 +124,43 @@ const showMessage = (message) => {
 //timer
 var timeEl = document.querySelector("#timer");
 var secondsLeft = 60;
+var timeModalEl = document.getElementById("time-modal")
+var modalCloseEl = document.querySelector(".modal-close");
+
+function showTimeModal() {
+  timeModalEl.style.display="block";
+};
+
+modalCloseEl.addEventListener ('click',function() {
+  timeModalEl.style.display="none";
+});
 
 function setTime() {
-    // Sets interval in variable
     var timerInterval = setInterval(function() { 
       secondsLeft--; 
       timeEl.textContent = "Time left: " + secondsLeft + " s";
   
       if(secondsLeft === 0) { 
         clearInterval(timerInterval);
-        sendMessage();
-      }
+        showTimeModal();
+      };
   
     }, 1000); 
-  }
+  };
 
-  function sendMessage() {
-    timeEl.textContent = " "; 
-    var timeUpEl = document.querySelector(".message-container");
-    timeUpEl.textContent("Time's up! Try again.") 
+ setTime();
   
-  }
-  
-  setTime();
-  
+// first API
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'b22145e873msh4d82e3e45ad2014p12d599jsn603c1467e9bb',
+		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+	}
+};
+
+fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=20&wordLength=4', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));

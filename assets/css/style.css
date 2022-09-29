@@ -64,6 +64,45 @@ body {
   margin: 2px;
 }
 
+<<<<<<< HEAD
+#time-modal {
+    width:300px;
+    height: 200px;
+    border: 1px solid white;
+    background-color:#121213;
+    font-family:Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    text-align:center;
+    padding: 40px 0;
+    position:absolute;
+    z-index:10;
+    top:40%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    display:none;
+    border-radius:10px;
+}
+
+.modal-close {
+    position:absolute;
+    top:10px;
+    right:10px;
+    font-weight:bold;
+}
+
+#highscore {
+  background-color:#121213;
+  font:white;
+  border:none;
+  outline:none;
+  font-family: 'Bebas Neue', cursive;
+}
+
+button#highscore:hover {
+  color: grey;
+  cursor:pointer;
+}
+=======
 .message-container {
   height: 30px;
 }
@@ -74,3 +113,4 @@ body {
   padding: 10px;
   margin: 0;
 }
+>>>>>>> main
