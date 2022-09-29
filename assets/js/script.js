@@ -2,8 +2,9 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.key-container')
 const messageDisplay = document.querySelector('.message-container')
+var wordIs = " ";
 
-const wordIs = 'EASY'
+// const wordIs = 'EASY'
 
 const keys = [
     'Q',
@@ -87,6 +88,7 @@ const handleClick = (letter) => {
     }
     addLetter(letter)
     console.log('guessRows', guessRows)
+    console.log(wordIs);
 }
 
 // Assigns onscreen keyboard push down event.
@@ -186,7 +188,7 @@ const flipTile = () => {
 
 // Timer
 var timeEl = document.querySelector("#timer");
-var secondsLeft = 5;
+var secondsLeft = 60;
 var timeModalEl = document.getElementById("time-modal")
 var modalCloseEl = document.querySelector(".modal-close");
 
@@ -206,6 +208,7 @@ function setTime() {
       if(secondsLeft === 0) { 
         clearInterval(timerInterval);
         showTimeModal();
+        //add code here for stopping game ?
       };
   
     }, 1000); 
@@ -227,7 +230,7 @@ scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
   
-// First API
+// random word API
 
 const options = {
 	method: 'GET',
@@ -237,7 +240,41 @@ const options = {
 	}
 };
 
-fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=20&wordLength=4', options)
+fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
 	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
+	.then(function (response) {
+            console.log(response[0]);
+            wordIs = response[0].toUpperCase();
+    });
+
+console.log(wordIs);
+
+// random definition at footer API 
+
+var wordDefEl = document.querySelector("#randomDef");
+
+const options2 = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'b22145e873msh4d82e3e45ad2014p12d599jsn603c1467e9bb',
+		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
+	}
+};
+
+fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
+	.then(response => response.json())
+	.then(function (response2) {
+        wordDefEl.textContent = JSON.stringify(response2);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
