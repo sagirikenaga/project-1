@@ -1,3 +1,4 @@
+// Global
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.key-container')
 const messageDisplay = document.querySelector('.message-container')
@@ -44,9 +45,12 @@ const guessRows = [
     ['', '', '', '']
 ]
 
+// Lets game begin from vry first tile.
 let currentRow = 0
 let currentTile = 0
+let isGameOver = false
 
+// Inserts tiles into array in place of ''.
 guessRows.forEach((guessRow, guessRowIndex) => {
     const rowElement = document.createElement('div')
     rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
@@ -59,6 +63,7 @@ guessRows.forEach((guessRow, guessRowIndex) => {
     tileDisplay.append(rowElement)
 })
 
+// Appends keys to keyboard and makes them buttons.
 keys.forEach(key => {
     const buttonElement = document.createElement('button')
     buttonElement.textContent = key
@@ -67,6 +72,7 @@ keys.forEach(key => {
     keyboard.append(buttonElement)
 });
 
+// Assigns ENTER key to input letters while BACK deletes.
 const handleClick = (letter) => {
     console.log('clicked', letter)
     if (letter === 'BACK') {
@@ -83,6 +89,7 @@ const handleClick = (letter) => {
     console.log('guessRows', guessRows)
 }
 
+// Assigns onscreen keyboard push down event.
 const addLetter = (letter) => {
     if (currentTile < 4 && currentRow < 6) {
         const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
@@ -93,6 +100,7 @@ const addLetter = (letter) => {
     }
 }
 
+// Assigns BACK button to delete letters.
 const deleteLetter = () => {
     if (currentTile > 0) {
         currentTile--
@@ -103,25 +111,80 @@ const deleteLetter = () => {
     }
 }
 
+// Stops user from being able to replace letters once row completed.
 const checkRow = () => {
     const guess = guessRows[currentRow].join('')
-
-    if (currentTile === 4) {       
+    // Adds comment for finding the correct word.
+    if (currentTile > 3) {       
         console.log('What is the word? ' + guess, 'The word is ' + wordIs)
+        flipTile()
         if (wordIs === guess) {
             showMessage('That is the word!')
+            isGameOver = true
+            return
+            // Adds comment for not finding correct word after 6 attempts
+        } else {
+            if (currentRow >= 5) {
+                isGameOver = false
+                showMessage('Game Over')
+                return
+            }
+            if (currentRow < 5) {
+                currentRow++
+                currentTile = 0
+            }
         }
     }
 }
 
+// Message for guessing correct word created under p and times out.
 const showMessage = (message) => {
     const messageElement = document.createElement('p')
     messageElement.textContent = message
     messageDisplay.append(messageElement)
-    setTimeout(() => messageDisplay.removeChild(messageElement), 2000)
+    setTimeout(() => messageDisplay.removeChild(messageElement), 1000)
 }
 
-//timer
+// Function to make colours apply to keyboard as well.
+const addColourToKey = (keyLetter, colour) => {
+    const key = document.getElementById(keyLetter)
+    key.classList.add(colour)
+}
+
+// Flips tiles while generating colour overlay for correct, wrong, and misplaced letters. 
+const flipTile = () => {
+    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
+    let checkWordIs = wordIs
+    const guess = []
+    // Each tile will have a colour display unique to that tile specifically like actual Wordle.
+    rowTiles.forEach(tile => {
+        guess.push({ letter: tile.getAttribute('data'), colour: 'grey-overlay'})
+    })
+    
+        guess.forEach((guess, index) => {
+            if (guess.letter == wordIs[index]) {
+                guess.colour = 'green-overlay'
+                checkWordIs = checkWordIs.replace(guess.letter, '')
+            }
+        })
+
+        guess.forEach(guess => {
+            if (checkWordIs. includes(guess.letter)) {
+                guess.colour = 'yellow-overlay'
+                checkWordIs = checkWordIs.replace(guess.letter, '')
+            }
+        })
+
+    rowTiles.forEach((tile, index) => {
+        setTimeout(() => { 
+            tile.classList.add('flip')
+            tile.classList.add(guess[index].colour)
+            addColourToKey(guess[index].letter, guess[index].colour)             
+        }, 500 * index)
+    })
+}
+
+// Timer
 var timeEl = document.querySelector("#timer");
 var secondsLeft = 5;
 var timeModalEl = document.getElementById("time-modal")
@@ -150,7 +213,7 @@ function setTime() {
 
  setTime();
 
- //high score modal 
+ // High Score modal 
 
  var scoreModalEl = document.getElementById("highscore-modal");
  var scoreCloseEl = document.querySelector(".score-modal-close");
@@ -164,7 +227,7 @@ scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
   
-// first API
+// First API
 
 const options = {
 	method: 'GET',
