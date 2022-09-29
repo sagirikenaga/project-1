@@ -136,7 +136,8 @@ body {
 }
 
 #highscore,
-#src-btn {
+#src-btn,
+#start-btn {
   background-color:#121213;
   font:white;
   border:none;
@@ -146,6 +147,10 @@ body {
 
 button#highscore:hover {
   color: grey;
+  cursor:pointer;
+}
+
+button#start-btn:hover {
   cursor:pointer;
 }
 
@@ -159,8 +164,12 @@ button#src-btn:hover {
 
 /* Messages */
 .message-container {
-  height: 30px;
-  margin-bottom: 5%;
+  height: 60px;
+  width: 22.5vw;
+  margin-top:1%;
+  margin-bottom: 1%;
+  border: dotted 1px rgb(183, 181, 181);
+
 }
 
 .message-container p {
@@ -189,4 +198,11 @@ button#src-btn:hover {
 footer {
   padding-top:3%;
   text-align:center;
+}
+
+#start-btn {
+  padding-top:1%;
+  text-align:right;
+  font-size:larger;
+  text-decoration-line: underline;
 }

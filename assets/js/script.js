@@ -152,7 +152,6 @@ const addColourToKey = (keyLetter, colour) => {
     const key = document.getElementById(keyLetter)
     key.classList.add(colour)
 }
-
 // Flips tiles while generating colour overlay for correct, wrong, and misplaced letters. 
 const flipTile = () => {
     const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
@@ -200,7 +199,9 @@ modalCloseEl.addEventListener ('click',function() {
   timeModalEl.style.display="none";
 });
 
-function setTime() {
+var startBtnEl = document.querySelector("#start-btn");
+
+startBtnEl.addEventListener('click', function() {
     var timerInterval = setInterval(function() { 
       secondsLeft--; 
       timeEl.textContent = "Time left: " + secondsLeft + " s";
@@ -212,9 +213,8 @@ function setTime() {
       };
   
     }, 1000); 
-  };
+  });
 
- setTime();
 
  // High Score modal 
 
@@ -229,7 +229,27 @@ function setTime() {
 scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
-  
+
+var scoresList = document.querySelector("#scores-list")
+
+var winCount = 0;
+var lossCount = 0;
+function storeScores() {
+    //do we have to clear the previous score? idk
+    if (isGameOver === true) {
+        win
+    }
+
+
+}
+
+
+
+
+
+
+
+
 // random word API
 
 const options = {
