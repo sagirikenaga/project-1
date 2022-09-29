@@ -206,3 +206,8 @@ footer {
   font-size:larger;
   text-decoration-line: underline;
 }
+
+#scores-count {
+  font:white;
+  font-size: large;
+}

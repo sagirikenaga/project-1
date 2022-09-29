@@ -2,10 +2,60 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.key-container')
 const messageDisplay = document.querySelector('.message-container')
+var scoreModalEl = document.getElementById("highscore-modal");
+var scoreCloseEl = document.querySelector(".score-modal-close");
+var scoreButtonEl = document.getElementById("highscore");
+var wordDefEl = document.querySelector("#randomDef");
+var timeEl = document.querySelector("#timer");
+var timeModalEl = document.getElementById("time-modal")
+var modalCloseEl = document.querySelector(".modal-close");
+var scoresCount = document.querySelector("#scores-count")
+var winDisplay = document.querySelector('#win-count');
+var lossDisplay = document.querySelector('#loss-count')
+var secondsLeft = 60;
 var wordIs = " ";
+var winCount = 0;
+var lossCount = 0;
+// var totalScores = {
+//     numberOfWins: winCount,
+//     numberOfLosses: lossCount,
+// }
 
-// const wordIs = 'EASY'
+function storeScores() {
+    localStorage.setItem("winCount", winCount);
+    localStorage.setItem("lossCount", lossCount);
+}
 
+function getWins() {
+    // Get stored value from client storage, if it exists
+    var storedWins = localStorage.getItem("winCount");
+    // If stored value doesn't exist, set counter to 0
+    if (storedWins === null) {
+      winCount = 0;
+    } else {
+      // If a value is retrieved from client storage set the winCounter to that value
+      winCount = storedWins;
+    }
+    //Render win count to page
+    winDisplay.textContent = winCount;
+    }
+
+function getLosses() {
+    var storedLosses = localStorage.getItem("lossCount");
+    if (storedLosses === null) {
+        lossCount = 0;
+    } else {
+        lossCount = storedLosses;
+    }
+    lossDisplay.textContent = lossCount;
+    }
+
+function init() {
+    storeScores();
+    getWins();
+    getLosses();
+    }
+     
 const keys = [
     'Q',
     'W',
@@ -114,30 +164,34 @@ const deleteLetter = () => {
 }
 
 // Stops user from being able to replace letters once row completed.
+// Also dictates if game is over and adds counts for total wins/losses 
 const checkRow = () => {
     const guess = guessRows[currentRow].join('')
     // Adds comment for finding the correct word.
     if (currentTile > 3) {       
         console.log('What is the word? ' + guess, 'The word is ' + wordIs)
         flipTile()
-        if (wordIs === guess) {
+        if (secondsLeft !== 0 && wordIs === guess) {
             showMessage('That is the word!')
             isGameOver = true
+            winCount++;
             return
             // Adds comment for not finding correct word after 6 attempts
         } else {
-            if (currentRow >= 5) {
-                isGameOver = false
-                showMessage('Game Over')
-                return
-            }
             if (currentRow < 5) {
                 currentRow++
                 currentTile = 0
             }
+            if (time ===0 || currentRow >= 5) {
+                isGameOver = false;
+                showMessage('Game Over');
+                lossCount++;
+                return
+            }
         }
     }
 }
+
 
 // Message for guessing correct word created under p and times out.
 const showMessage = (message) => {
@@ -186,10 +240,6 @@ const flipTile = () => {
 }
 
 // Timer
-var timeEl = document.querySelector("#timer");
-var secondsLeft = 60;
-var timeModalEl = document.getElementById("time-modal")
-var modalCloseEl = document.querySelector(".modal-close");
 
 function showTimeModal() {
   timeModalEl.style.display="block";
@@ -201,6 +251,7 @@ modalCloseEl.addEventListener ('click',function() {
 
 var startBtnEl = document.querySelector("#start-btn");
 
+//starts the game/timer 
 startBtnEl.addEventListener('click', function() {
     var timerInterval = setInterval(function() { 
       secondsLeft--; 
@@ -218,10 +269,6 @@ startBtnEl.addEventListener('click', function() {
 
  // High Score modal 
 
- var scoreModalEl = document.getElementById("highscore-modal");
- var scoreCloseEl = document.querySelector(".score-modal-close");
- var scoreButtonEl = document.getElementById("highscore");
-
  scoreButtonEl.addEventListener ('click',function() {
   scoreModalEl.style.display="block";
 });
@@ -230,18 +277,7 @@ scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
 
-var scoresList = document.querySelector("#scores-list")
 
-var winCount = 0;
-var lossCount = 0;
-function storeScores() {
-    //do we have to clear the previous score? idk
-    if (isGameOver === true) {
-        win
-    }
-
-
-}
 
 
 
@@ -271,8 +307,6 @@ console.log(wordIs);
 
 // random definition at footer API 
 
-var wordDefEl = document.querySelector("#randomDef");
-
 const options2 = {
 	method: 'GET',
 	headers: {
@@ -287,10 +321,7 @@ fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', optio
         wordDefEl.textContent = JSON.stringify(response2);
     });
 
-
-
-
-
+    init();
 
 
 
