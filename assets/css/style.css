@@ -1,3 +1,4 @@
+/* Global */
 * {
   color: #ffffff;  
   font-family: 'Bebas Neue', cursive;
@@ -8,7 +9,7 @@ body {
 }
 
 .game-container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,6 +45,7 @@ body {
   margin-left: 30px;
 }
 
+/* ENTER and BACK keys */
 .key-container button:nth-child(20),
 .key-container button:nth-child(28) {
   width: 68px;
@@ -64,6 +66,24 @@ body {
   margin: 2px;
 }
 
+/* Tile animations */
+.tile.flip {
+  animation: 0.5s linear flipping;
+}
+
+@keyframes flipping {
+  0% {
+      transform: rotateX(0deg);
+  }
+  50% {
+      transform: rotateX(90deg);
+  }
+  100% {
+      transform: rotateX(0deg);
+  }
+}
+
+/* Timer */
 #time-modal {
     width:300px;
     height: 200px;
@@ -89,6 +109,7 @@ body {
     font-weight:bold;
 }
 
+/* High Scores */
 #highscore-modal {
   width:300px;
   height: 400px;
@@ -131,8 +152,10 @@ button#highscore:hover {
   cursor:pointer;
 }
 
+/* Messages */
 .message-container {
   height: 30px;
+  margin-bottom: 5%;
 }
 
 .message-container p {
@@ -140,4 +163,20 @@ button#highscore:hover {
   border-radius: 10px;
   padding: 10px;
   margin: 0;
+}
+
+/* Colour coded guesses */
+.grey-overlay {
+  background-color: #3a3a3c !important;
+  border:none !important;
+}
+
+.yellow-overlay {
+  background-color: #b59f3a !important;
+  border:none !important;
+}
+
+.green-overlay {
+  background-color: #538d4e !important;
+  border:none !important;
 }
