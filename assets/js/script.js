@@ -14,6 +14,9 @@ var scoresCount = document.querySelector("#scores-count")
 var winDisplay = document.querySelector('#win-count');
 var lossDisplay = document.querySelector('#loss-count')
 var playAgainBtnEl = document.querySelector("#play-again-btn")
+var winPlayAgainBtn = document.querySelector("#win-play-again")
+var winCloseEl = document.querySelector(".win-modal-close");
+var winModalEl = document.querySelector("#win-modal")
 var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
@@ -154,6 +157,34 @@ const checkRow = () => {
     }
 }
 
+function showKeyboard() {
+    keyboard.style.zIndex = "10";
+}
+
+function hideKeyboard() {
+    keyboard.style.zIndex="-10";
+}
+
+function startGame() {
+    isGameOver = false; //????????????
+    secondsLeft = 60;
+    startTimer();
+}
+
+function startTimer() {
+    timer = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = "Time left: " + secondsLeft + " s";
+        showKeyboard();
+
+        if(secondsLeft === 0) { 
+            clearInterval(timer);
+            showTimeModal();
+            //add code here for stopping game ?
+          };
+    }, 1000);
+};
+
 // functions for storing the wins/counts
 
 function storeScores() {
@@ -185,10 +216,19 @@ function getLosses() {
     lossDisplay.textContent = lossCount;
     }
 
+function showWinModal() {
+    winModalEl.style.display="block";
+}
+
+winCloseEl.addEventListener ('click',function() {
+    winModalEl.style.display="none";
+  });
+
 function gameWin() {
     showMessage('That is the word!')
     winCount++;
-    clearInterval();
+    clearInterval(timer);
+    showWinModal();
     storeScores();
     }
 
@@ -199,8 +239,8 @@ function gameWin() {
 function gameLoss() {
     showMessage('Game Over');
     lossCount++;
-    hideKeyboard();
-    clearInterval();
+    clearInterval(timer);
+    showTimeModal();
     storeScores();
 }
 
@@ -272,34 +312,6 @@ modalCloseEl.addEventListener ('click',function() {
 //     keyboard.style.flexwrap="wrap";
 // };
 
-function showKeyboard() {
-    keyboard.style.zIndex = "10";
-}
-
-function hideKeyboard() {
-    keyboard.style.zIndex="-10";
-}
-
-function startGame() {
-    isGameOver = false; //????????????
-    secondsLeft= 5;
-    startTimer();
-}
-
-function startTimer() {
-    timer = setInterval(function() {
-        secondsLeft--;
-        timeEl.textContent = "Time left: " + secondsLeft + " s";
-        showKeyboard();
-
-        if(secondsLeft === 0) { 
-            clearInterval(timer);
-            showTimeModal();
-            //add code here for stopping game ?
-          };
-    }, 1000);
-};
-
 startBtnEl.addEventListener('click', startGame)
 
  // High Score modal 
@@ -313,6 +325,10 @@ scoreCloseEl.addEventListener('click',function() {
 });
 
 playAgainBtnEl.addEventListener('click', function() {
+    window.location.reload();
+})
+
+winPlayAgainBtn.addEventListener('click', function() {
     window.location.reload();
 })
 
