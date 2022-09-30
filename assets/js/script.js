@@ -17,7 +17,8 @@ var playAgainBtnEl = document.querySelector("#play-again-btn")
 var winPlayAgainBtn = document.querySelector("#win-play-again")
 var winCloseEl = document.querySelector(".win-modal-close");
 var winModalEl = document.querySelector("#win-modal")
-var wordIs = " ";
+var wordIs = "EASY"
+// var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
 var timer;
@@ -63,7 +64,7 @@ const guessRows = [
     ['', '', '', '']
 ]
 
-// Lets game begin from vry first tile.
+// Lets game begin from very first tile.
 let currentRow = 0
 let currentTile = 0
 let isGameOver = false
@@ -72,7 +73,7 @@ let isGameOver = false
 guessRows.forEach((guessRow, guessRowIndex) => {
     const rowElement = document.createElement('div')
     rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
-    guessRow.forEach((guess, guessIndex) => {
+    guessRow.forEach((_guess, guessIndex) => {
         const tileElement = document.createElement('div')
         tileElement.setAttribute('id', 'guessRow-' + guessRowIndex + '-tile-' + guessIndex)
         tileElement.classList.add('tile')
@@ -343,13 +344,13 @@ winPlayAgainBtn.addEventListener('click', function() {
 
 // random word API -> randomly selects a word with a length of 4 characters as the word needed to be guessed 
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-	}
-};
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+// 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+// 	}
+// };
 
 // fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
 // 	.then(response => response.json())
@@ -360,6 +361,7 @@ const options = {
 
 // console.log(wordIs);
 
+// organize-js
 // // random definition at footer API --> randomly displays a dutch word with translation/definition and dutch pronunciation
 
 // const options2 = {
