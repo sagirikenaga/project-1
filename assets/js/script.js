@@ -16,45 +16,6 @@ var secondsLeft = 60;
 var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
-// var totalScores = {
-//     numberOfWins: winCount,
-//     numberOfLosses: lossCount,
-// }
-
-function storeScores() {
-    localStorage.setItem("winCount", winCount);
-    localStorage.setItem("lossCount", lossCount);
-}
-
-function getWins() {
-    // Get stored value from client storage, if it exists
-    var storedWins = localStorage.getItem("winCount");
-    // If stored value doesn't exist, set counter to 0
-    if (storedWins === null) {
-      winCount = 0;
-    } else {
-      // If a value is retrieved from client storage set the winCounter to that value
-      winCount = storedWins;
-    }
-    //Render win count to page
-    winDisplay.textContent = winCount;
-    }
-
-function getLosses() {
-    var storedLosses = localStorage.getItem("lossCount");
-    if (storedLosses === null) {
-        lossCount = 0;
-    } else {
-        lossCount = storedLosses;
-    }
-    lossDisplay.textContent = lossCount;
-    }
-
-function init() {
-    storeScores();
-    getWins();
-    getLosses();
-    }
      
 const keys = [
     'Q',
@@ -175,6 +136,7 @@ const checkRow = () => {
             showMessage('That is the word!')
             isGameOver = true
             winCount++;
+            clearInterval();
             return
             // Adds comment for not finding correct word after 6 attempts
         } else {
@@ -182,16 +144,53 @@ const checkRow = () => {
                 currentRow++
                 currentTile = 0
             }
-            if (time ===0 || currentRow >= 5) {
+            if (secondsLeft === 0 || currentRow >= 5) {
                 isGameOver = false;
                 showMessage('Game Over');
                 lossCount++;
+                clearInterval();
                 return
             }
         }
     }
 }
 
+// functions for storing the wins/counts
+
+function storeScores() {
+    localStorage.setItem("winCount", winCount);
+    localStorage.setItem("lossCount", lossCount);
+}
+
+function getWins() {
+    // Get stored value from client storage, if it exists
+    var storedWins = localStorage.getItem("winCount");
+    // If stored value doesn't exist, set counter to 0
+    if (storedWins === null) {
+      winCount = 0;
+    } else {
+      // If a value is retrieved from client storage set the winCounter to that value
+      winCount = storedWins;
+    }
+    //Render win count to page
+    winDisplay.textContent = winCount;
+    }
+
+function getLosses() {
+    var storedLosses = localStorage.getItem("lossCount");
+    if (storedLosses === null) {
+        lossCount = 0;
+    } else {
+        lossCount = storedLosses;
+    }
+    lossDisplay.textContent = lossCount;
+    }
+
+function init() {
+    storeScores();
+    getWins();
+    getLosses();
+    }
 
 // Message for guessing correct word created under p and times out.
 const showMessage = (message) => {
@@ -277,21 +276,12 @@ scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
 
-
-
-
-
-
-
-
-
-
 // random word API
 
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'b22145e873msh4d82e3e45ad2014p12d599jsn603c1467e9bb',
+		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
 	}
 };
@@ -310,7 +300,7 @@ console.log(wordIs);
 const options2 = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'b22145e873msh4d82e3e45ad2014p12d599jsn603c1467e9bb',
+		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
 		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
 	}
 };
