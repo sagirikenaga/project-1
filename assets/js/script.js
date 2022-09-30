@@ -18,7 +18,7 @@ var winPlayAgainBtn = document.querySelector("#win-play-again")
 var winCloseEl = document.querySelector(".win-modal-close");
 var winModalEl = document.querySelector("#win-modal")
 var wordIs = "EASY"
-// var wordIs = " ";
+var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
 var timer;
@@ -165,7 +165,7 @@ function showKeyboard() {
 
 //function to start game, sets time to 60 seconds and starts the timer countdown 
 function startGame() {
-    isGameOver = false; //????????????
+    isGameOver = false; 
     secondsLeft = 60;
     startTimer();
 }
@@ -344,39 +344,39 @@ winPlayAgainBtn.addEventListener('click', function() {
 
 // random word API -> randomly selects a word with a length of 4 characters as the word needed to be guessed 
 
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-// 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-// 	}
-// };
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+	}
+};
 
-// fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
-// 	.then(response => response.json())
-// 	.then(function (response) {
-//             console.log(response[0]);
-//             wordIs = response[0].toUpperCase();
-//     });
+fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
+	.then(response => response.json())
+	.then(function (response) {
+            console.log(response[0]);
+            wordIs = response[0].toUpperCase();
+    });
 
 // console.log(wordIs);
 
 // organize-js
 // // random definition at footer API --> randomly displays a dutch word with translation/definition and dutch pronunciation
 
-// const options2 = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-// 		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
-// 	}
-// };
+const options2 = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
+	}
+};
 
-// fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
-// 	.then(response => response.json())
-// 	.then(function (response2) {
-//         wordDefEl.textContent = JSON.stringify(response2);
-//     });
+fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
+	.then(response => response.json())
+	.then(function (response2) {
+        wordDefEl.textContent = JSON.stringify(response2);
+    });
 
 
 
