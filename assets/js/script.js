@@ -158,20 +158,20 @@ const checkRow = () => {
     }
 }
 
+//function to show keyboard that is called when the game is started in startGame() function 
 function showKeyboard() {
     keyboard.style.zIndex = "10";
 }
 
-function hideKeyboard() {
-    keyboard.style.zIndex="-10";
-}
-
+//function to start game, sets time to 60 seconds and starts the timer countdown 
 function startGame() {
     isGameOver = false; //????????????
     secondsLeft = 60;
     startTimer();
 }
 
+//starts the timer, sets the interval and counts down with displayed text
+//clears the timer interval when time reaches 0 and shows the modal to indicate the game is over 
 function startTimer() {
     timer = setInterval(function() {
         secondsLeft--;
@@ -181,50 +181,57 @@ function startTimer() {
         if(secondsLeft === 0) { 
             clearInterval(timer);
             showTimeModal();
-            //add code here for stopping game ?
           };
     }, 1000);
 };
 
-// functions for storing the wins/counts
+//UPDATES WINS/LOSSES
 
+// functions for storing the wins/counts and setting as the updated count in local storage 
 function storeScores() {
     localStorage.setItem("winCount", winCount);
     localStorage.setItem("lossCount", lossCount);
 }
 
+// retrieves the stored wins to count and display in the high score modal 
 function getWins() {
-    // Get stored value from client storage, if it exists
     var storedWins = localStorage.getItem("winCount");
-    // If stored value doesn't exist, set counter to 0
+    // ensures there is a stored value, otherwise 0 
     if (storedWins === null) {
       winCount = 0;
     } else {
-      // If a value is retrieved from client storage set the winCounter to that value
+      // updates the stored wins to the number of wins stored in the local storage 
       winCount = storedWins;
     }
-    //Render win count to page
+    // displays the number of wins on the high score modal 
     winDisplay.textContent = winCount;
     }
 
+// retrieves the stored losses to count and display in the high score modal 
 function getLosses() {
     var storedLosses = localStorage.getItem("lossCount");
+    // ensures there is a stored value, otherwise 0
     if (storedLosses === null) {
         lossCount = 0;
     } else {
+        // updates the stored losses to the number of losses stored in the local storage 
         lossCount = storedLosses;
     }
+    //displasy the number of losses on the high score modal 
     lossDisplay.textContent = lossCount;
     }
 
+// displays the modal for when the user wins the game 
 function showWinModal() {
     winModalEl.style.display="block";
 }
 
+//closes the win modal for when the user clicks the "X" button 
 winCloseEl.addEventListener ('click',function() {
     winModalEl.style.display="none";
   });
 
+// function that runs when the user guesses the correct word and wins the game; increases the win count, clears the interval, stores the score and shows the win modal 
 function gameWin() {
     showMessage('That is the word!')
     winCount++;
@@ -233,10 +240,7 @@ function gameWin() {
     storeScores();
     }
 
-// function hideKeyboard() {
-//     keyboard.style.display="none";
-// }
-
+// function that runs when the time either runs out or they use up all attempts without guessing the word; shows game over modal, increases loss count, clears the interval and stores the new score
 function gameLoss() {
     showMessage('Game Over');
     lossCount++;
@@ -245,6 +249,7 @@ function gameLoss() {
     storeScores();
 }
 
+// function runs in order to retrive the number of wins/losses to display 
 function init() {
     getWins();
     getLosses();
@@ -298,42 +303,46 @@ const flipTile = () => {
     })
 }
 
-// Timer
+// TIMER
 
+//displays modal either when time is up or all attempts are used 
 function showTimeModal() {
   timeModalEl.style.display="block";
 };
 
+//closes the modal when the "x" is clicked 
 modalCloseEl.addEventListener ('click',function() {
   timeModalEl.style.display="none";
 });
 
-// function showKeyboard () {
-//     keyboard.style.display="flex";
-//     keyboard.style.flexwrap="wrap";
-// };
-
+//start button allows the startGame function to run, allowing for the keyboard to appear, timer to run and game to start
 startBtnEl.addEventListener('click', startGame)
 
  // High Score modal 
 
+ // opens modal when the high score button is clicked 
  scoreButtonEl.addEventListener ('click',function() {
   scoreModalEl.style.display="block";
 });
 
+//closes modal when the "x" button is clicked 
 scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
 
+// allows user to play again when "play again" button is clicked; refreshes the page which resets the game and updates the scores 
 playAgainBtnEl.addEventListener('click', function() {
     window.location.reload();
 })
 
+// allows user to play again when "play again" button is clicked; refreshes the page which resets the game and updates the scores 
 winPlayAgainBtn.addEventListener('click', function() {
     window.location.reload();
 })
 
-// random word API
+// APIS 
+
+// random word API -> randomly selects a word with a length of 4 characters as the word needed to be guessed 
 
 // const options = {
 // 	method: 'GET',
@@ -352,7 +361,8 @@ winPlayAgainBtn.addEventListener('click', function() {
 
 // console.log(wordIs);
 
-// // random definition at footer API 
+// organize-js
+// // random definition at footer API --> randomly displays a dutch word with translation/definition and dutch pronunciation
 
 // const options2 = {
 // 	method: 'GET',
