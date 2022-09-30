@@ -133,10 +133,8 @@ const checkRow = () => {
         console.log('What is the word? ' + guess, 'The word is ' + wordIs)
         flipTile()
         if (secondsLeft !== 0 && wordIs === guess) {
-            showMessage('That is the word!')
             isGameOver = true
-            winCount++;
-            clearInterval();
+            gameWin();
             return
             // Adds comment for not finding correct word after 6 attempts
         } else {
@@ -144,11 +142,9 @@ const checkRow = () => {
                 currentRow++
                 currentTile = 0
             }
-            if (secondsLeft === 0 || currentRow >= 5) {
+            if (secondsLeft === 0 && wordIs !== guess || currentRow >= 5) {
                 isGameOver = false;
-                showMessage('Game Over');
-                lossCount++;
-                clearInterval();
+                gameLoss();
                 return
             }
         }
@@ -186,11 +182,26 @@ function getLosses() {
     lossDisplay.textContent = lossCount;
     }
 
-function init() {
+function gameWin() {
+    showMessage('That is the word!')
+    winCount++;
+    clearInterval();
     storeScores();
+    }
+
+function gameLoss() {
+    showMessage('Game Over');
+    lossCount++;
+    clearInterval();
+    storeScores();
+}
+
+function init() {
     getWins();
     getLosses();
     }
+
+init();
 
 // Message for guessing correct word created under p and times out.
 const showMessage = (message) => {
@@ -310,11 +321,6 @@ fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', optio
 	.then(function (response2) {
         wordDefEl.textContent = JSON.stringify(response2);
     });
-
-    init();
-
-
-
 
 
 
