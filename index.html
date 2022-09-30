@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <title>What's the Word?</title>
 </head>
@@ -27,6 +26,11 @@
                         <p>Losses:</p>
                         <p id="loss-count"></p>
                         <span class="score-modal-close">X</span>
+                    </div>
+                    <button id="help" class="has-text-right-desktop">Help</button>
+                    <div id="help-modal" class="has-text-left is-size-3">
+                         <img src="assets/images/examples.png" id="examples" />
+                        <span class="help-modal-close">X</span>
                     </div>
                 <p id="timer" class="has-text-left-desktop"></p>
                     <div id="time-modal">

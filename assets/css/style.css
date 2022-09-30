@@ -136,13 +136,14 @@ body {
   position:absolute;
   z-index:20;
   top:40%;
-  left:50%;
+  right:55%;
   transform: translate(-50%, -50%);
   display:none;
   border-radius:10px;
 }
 
-.score-modal-close {
+.score-modal-close,
+.help-modal-close {
   position:absolute;
   top:10px;
   right:10px;
@@ -150,6 +151,7 @@ body {
 }
 
 #highscore,
+#help,
 #src-btn,
 #start-btn,
 #play-again-btn,
@@ -186,6 +188,39 @@ button#win-play-again:hover {
 
 .score-modal-close:hover {
   cursor:pointer;
+}
+
+/* Help */
+#help-modal {
+  width:300px;
+  height: 400px;
+  box-sizing: border-box;
+  position: absolute;
+  z-index:20;
+  top:40%;
+  left:70%;
+  transform: translate(-50%, -50%);
+  display:none;
+}
+
+#help {
+  margin-left: 76%;
+}
+
+
+#examples {
+  position: relative;
+  border: 1px solid white;
+  border-radius:10px;
+}
+
+.help-modal-close:hover {
+  cursor: pointer;
+}
+
+#help:hover {
+  cursor: pointer;
+  color: grey;
 }
 
 /* Messages */
