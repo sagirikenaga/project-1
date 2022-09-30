@@ -17,7 +17,8 @@ var playAgainBtnEl = document.querySelector("#play-again-btn")
 var winPlayAgainBtn = document.querySelector("#win-play-again")
 var winCloseEl = document.querySelector(".win-modal-close");
 var winModalEl = document.querySelector("#win-modal")
-var wordIs = " ";
+var wordIs = "EASY"
+// var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
 var timer;
@@ -63,7 +64,7 @@ const guessRows = [
     ['', '', '', '']
 ]
 
-// Lets game begin from vry first tile.
+// Lets game begin from very first tile.
 let currentRow = 0
 let currentTile = 0
 let isGameOver = false
@@ -72,7 +73,7 @@ let isGameOver = false
 guessRows.forEach((guessRow, guessRowIndex) => {
     const rowElement = document.createElement('div')
     rowElement.setAttribute('id', 'guessRow-' + guessRowIndex)
-    guessRow.forEach((guess, guessIndex) => {
+    guessRow.forEach((_guess, guessIndex) => {
         const tileElement = document.createElement('div')
         tileElement.setAttribute('id', 'guessRow-' + guessRowIndex + '-tile-' + guessIndex)
         tileElement.classList.add('tile')
@@ -334,38 +335,38 @@ winPlayAgainBtn.addEventListener('click', function() {
 
 // random word API
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-	}
-};
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+// 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+// 	}
+// };
 
-fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
-	.then(response => response.json())
-	.then(function (response) {
-            console.log(response[0]);
-            wordIs = response[0].toUpperCase();
-    });
+// fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
+// 	.then(response => response.json())
+// 	.then(function (response) {
+//             console.log(response[0]);
+//             wordIs = response[0].toUpperCase();
+//     });
 
-console.log(wordIs);
+// console.log(wordIs);
 
-// random definition at footer API 
+// // random definition at footer API 
 
-const options2 = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
-	}
-};
+// const options2 = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+// 		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
+// 	}
+// };
 
-fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
-	.then(response => response.json())
-	.then(function (response2) {
-        wordDefEl.textContent = JSON.stringify(response2);
-    });
+// fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
+// 	.then(response => response.json())
+// 	.then(function (response2) {
+//         wordDefEl.textContent = JSON.stringify(response2);
+//     });
 
 
 
