@@ -9,13 +9,16 @@ var wordDefEl = document.querySelector("#randomDef");
 var timeEl = document.querySelector("#timer");
 var timeModalEl = document.getElementById("time-modal")
 var modalCloseEl = document.querySelector(".modal-close");
+var startBtnEl = document.querySelector("#start-btn");
 var scoresCount = document.querySelector("#scores-count")
 var winDisplay = document.querySelector('#win-count');
 var lossDisplay = document.querySelector('#loss-count')
-var secondsLeft = 60;
+var playAgainBtnEl = document.querySelector("#play-again-btn")
 var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
+var timer;
+var secondsLeft;
      
 const keys = [
     'Q',
@@ -103,7 +106,7 @@ const handleClick = (letter) => {
 }
 
 // Assigns onscreen keyboard push down event.
-const addLetter = (letter) => {
+const addLetter = (letter)=> {
     if (currentTile < 4 && currentRow < 6) {
         const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
         tile.textContent = letter
@@ -138,11 +141,11 @@ const checkRow = () => {
             return
             // Adds comment for not finding correct word after 6 attempts
         } else {
-            if (currentRow < 5) {
+            if (currentRow < 6) {
                 currentRow++
                 currentTile = 0
             }
-            if (secondsLeft === 0 && wordIs !== guess || currentRow >= 5) {
+            if (secondsLeft < 1 || currentRow >= 6) {
                 isGameOver = false;
                 gameLoss();
                 return
@@ -189,9 +192,14 @@ function gameWin() {
     storeScores();
     }
 
+// function hideKeyboard() {
+//     keyboard.style.display="none";
+// }
+
 function gameLoss() {
     showMessage('Game Over');
     lossCount++;
+    hideKeyboard();
     clearInterval();
     storeScores();
 }
@@ -259,23 +267,40 @@ modalCloseEl.addEventListener ('click',function() {
   timeModalEl.style.display="none";
 });
 
-var startBtnEl = document.querySelector("#start-btn");
+// function showKeyboard () {
+//     keyboard.style.display="flex";
+//     keyboard.style.flexwrap="wrap";
+// };
 
-//starts the game/timer 
-startBtnEl.addEventListener('click', function() {
-    var timerInterval = setInterval(function() { 
-      secondsLeft--; 
-      timeEl.textContent = "Time left: " + secondsLeft + " s";
-  
-      if(secondsLeft === 0) { 
-        clearInterval(timerInterval);
-        showTimeModal();
-        //add code here for stopping game ?
-      };
-  
-    }, 1000); 
-  });
+function showKeyboard() {
+    keyboard.style.zIndex = "10";
+}
 
+function hideKeyboard() {
+    keyboard.style.zIndex="-10";
+}
+
+function startGame() {
+    isGameOver = false; //????????????
+    secondsLeft= 5;
+    startTimer();
+}
+
+function startTimer() {
+    timer = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = "Time left: " + secondsLeft + " s";
+        showKeyboard();
+
+        if(secondsLeft === 0) { 
+            clearInterval(timer);
+            showTimeModal();
+            //add code here for stopping game ?
+          };
+    }, 1000);
+};
+
+startBtnEl.addEventListener('click', startGame)
 
  // High Score modal 
 
@@ -286,6 +311,10 @@ startBtnEl.addEventListener('click', function() {
 scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
+
+playAgainBtnEl.addEventListener('click', function() {
+    window.location.reload();
+})
 
 // random word API
 
