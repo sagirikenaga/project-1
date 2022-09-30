@@ -9,13 +9,16 @@ var wordDefEl = document.querySelector("#randomDef");
 var timeEl = document.querySelector("#timer");
 var timeModalEl = document.getElementById("time-modal")
 var modalCloseEl = document.querySelector(".modal-close");
+var startBtnEl = document.querySelector("#start-btn");
 var scoresCount = document.querySelector("#scores-count")
 var winDisplay = document.querySelector('#win-count');
 var lossDisplay = document.querySelector('#loss-count')
-var secondsLeft = 60;
+var playAgainBtnEl = document.querySelector("#play-again-btn")
 var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
+var timer;
+var secondsLeft;
      
 const keys = [
     'Q',
@@ -103,7 +106,7 @@ const handleClick = (letter) => {
 }
 
 // Assigns onscreen keyboard push down event.
-const addLetter = (letter) => {
+const addLetter = (letter)=> {
     if (currentTile < 4 && currentRow < 6) {
         const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile)
         tile.textContent = letter
@@ -138,11 +141,11 @@ const checkRow = () => {
             return
             // Adds comment for not finding correct word after 6 attempts
         } else {
-            if (currentRow < 5) {
+            if (currentRow < 6) {
                 currentRow++
                 currentTile = 0
             }
-            if (secondsLeft === 0 && wordIs !== guess || currentRow >= 5) {
+            if (secondsLeft < 1 || currentRow >= 6) {
                 isGameOver = false;
                 gameLoss();
                 return
@@ -189,9 +192,14 @@ function gameWin() {
     storeScores();
     }
 
+// function hideKeyboard() {
+//     keyboard.style.display="none";
+// }
+
 function gameLoss() {
     showMessage('Game Over');
     lossCount++;
+    hideKeyboard();
     clearInterval();
     storeScores();
 }
@@ -259,23 +267,40 @@ modalCloseEl.addEventListener ('click',function() {
   timeModalEl.style.display="none";
 });
 
-var startBtnEl = document.querySelector("#start-btn");
+// function showKeyboard () {
+//     keyboard.style.display="flex";
+//     keyboard.style.flexwrap="wrap";
+// };
 
-//starts the game/timer 
-startBtnEl.addEventListener('click', function() {
-    var timerInterval = setInterval(function() { 
-      secondsLeft--; 
-      timeEl.textContent = "Time left: " + secondsLeft + " s";
-  
-      if(secondsLeft === 0) { 
-        clearInterval(timerInterval);
-        showTimeModal();
-        //add code here for stopping game ?
-      };
-  
-    }, 1000); 
-  });
+function showKeyboard() {
+    keyboard.style.zIndex = "10";
+}
 
+function hideKeyboard() {
+    keyboard.style.zIndex="-10";
+}
+
+function startGame() {
+    isGameOver = false; //????????????
+    secondsLeft= 5;
+    startTimer();
+}
+
+function startTimer() {
+    timer = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = "Time left: " + secondsLeft + " s";
+        showKeyboard();
+
+        if(secondsLeft === 0) { 
+            clearInterval(timer);
+            showTimeModal();
+            //add code here for stopping game ?
+          };
+    }, 1000);
+};
+
+startBtnEl.addEventListener('click', startGame)
 
  // High Score modal 
 
@@ -287,6 +312,10 @@ scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
 
+playAgainBtnEl.addEventListener('click', function() {
+    window.location.reload();
+})
+
 // random word API
 
 const options = {
@@ -297,30 +326,30 @@ const options = {
 	}
 };
 
-fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
-	.then(response => response.json())
-	.then(function (response) {
-            console.log(response[0]);
-            wordIs = response[0].toUpperCase();
-    });
+// fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
+// 	.then(response => response.json())
+// 	.then(function (response) {
+//             console.log(response[0]);
+//             wordIs = response[0].toUpperCase();
+//     });
 
-console.log(wordIs);
+// console.log(wordIs);
 
-// random definition at footer API 
+// // random definition at footer API 
 
-const options2 = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
-	}
-};
+// const options2 = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+// 		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
+// 	}
+// };
 
-fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
-	.then(response => response.json())
-	.then(function (response2) {
-        wordDefEl.textContent = JSON.stringify(response2);
-    });
+// fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
+// 	.then(response => response.json())
+// 	.then(function (response2) {
+//         wordDefEl.textContent = JSON.stringify(response2);
+//     });
 
 
 
