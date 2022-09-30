@@ -38,8 +38,19 @@ body {
   height: 58px;
   border-radius: 4px;
   border: none;
-  background-color: #818384;
+  background-color: hsl(
+    var(--hue, 200),
+    var(--saturation, 1%),
+    calc(var(--lightness-offset, 0%) + var(--lightness, 51%))
+  );
   margin: 4px;
+  font-size: clamp(.5rem, 2.5vmin, 1.5rem);
+  cursor: pointer;
+  user-select: none;
+}
+
+.key-container button:hover {
+  --lightness-offset: 10%;
 }
 
 .key-container button:nth-child(11) {
@@ -183,8 +194,6 @@ button#win-play-again:hover {
   width: 22.5vw;
   margin-top:1%;
   margin-bottom: 1%;
-  border: dotted 1px rgb(183, 181, 181);
-
 }
 
 .message-container p {
@@ -194,7 +203,7 @@ button#win-play-again:hover {
   margin: 0;
 }
 
-/* Colour coded guesses */
+/* Colour-coded guesses */
 .grey-overlay {
   background-color: #3a3a3c !important;
   border:none !important;
