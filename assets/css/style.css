@@ -30,6 +30,7 @@ body {
   width: 510px;
   display: flex;
   flex-wrap: wrap;
+  z-index:-10;
 }
 
 .key-container button {
@@ -94,7 +95,7 @@ body {
     text-align:center;
     padding: 40px 0;
     position:absolute;
-    z-index:10;
+    z-index:20;
     top:40%;
     left:50%;
     transform: translate(-50%, -50%);
@@ -120,7 +121,7 @@ body {
   text-align:center;
   padding: 40px 0;
   position:absolute;
-  z-index:10;
+  z-index:20;
   top:40%;
   left:50%;
   transform: translate(-50%, -50%);
@@ -137,7 +138,8 @@ body {
 
 #highscore,
 #src-btn,
-#start-btn {
+#start-btn,
+#play-again-btn {
   background-color:#121213;
   font:white;
   border:none;
@@ -151,6 +153,11 @@ button#highscore:hover {
 }
 
 button#start-btn:hover {
+  cursor:pointer;
+}
+
+button#play-again-btn:hover {
+  color:grey;
   cursor:pointer;
 }
 
