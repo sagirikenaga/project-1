@@ -11,22 +11,22 @@ var scoreButtonEl = document.getElementById("highscore");
 var wordDefEl = document.querySelector("#randomDef");
 var timeEl = document.querySelector("#timer");
 var timeModalEl = document.getElementById("time-modal")
-var modalCloseEl = document.querySelector(".modal-close");
 var startBtnEl = document.querySelector("#start-btn");
 var scoresCount = document.querySelector("#scores-count")
 var winDisplay = document.querySelector('#win-count');
 var lossDisplay = document.querySelector('#loss-count')
 var playAgainBtnEl = document.querySelector("#play-again-btn")
 var winPlayAgainBtn = document.querySelector("#win-play-again")
-var winCloseEl = document.querySelector(".win-modal-close");
 var winModalEl = document.querySelector("#win-modal")
-var wordIs = "EASY"
+// var wordIs = "EASY"
 var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
 var timer;
 var secondsLeft;
-     
+    
+// ARRAYS & LAYOUT
+
 const keys = [
     'Q',
     'W',
@@ -96,20 +96,15 @@ keys.forEach(key => {
 
 // Assigns ENTER key to input letters while BACK deletes.
 const handleClick = (letter) => {
-    console.log('clicked', letter)
     if (letter === 'BACK') {
         deleteLetter()
-        console.log('guessRows', guessRows)
         return
     }
     if (letter === 'ENTER') {
         checkRow()
-        console.log('guessRows', guessRows)
         return
     }
     addLetter(letter)
-    console.log('guessRows', guessRows)
-    console.log(wordIs);
 }
 
 // Assigns onscreen keyboard push down event.
@@ -140,7 +135,6 @@ const checkRow = () => {
     const guess = guessRows[currentRow].join('')
     // Adds comment for finding the correct word.
     if (currentTile > 3) {       
-        console.log('What is the word? ' + guess, 'The word is ' + wordIs)
         flipTile()
         if (secondsLeft !== 0 && wordIs === guess) {
             isGameOver = true
@@ -161,20 +155,21 @@ const checkRow = () => {
     }
 }
 
-//function to show keyboard that is called when the game is started in startGame() function 
+// Function to show keyboard that is called when the game is started in startGame() function 
 function showKeyboard() {
     keyboard.style.zIndex = "10";
 }
 
-//function to start game, sets time to 60 seconds and starts the timer countdown 
+// Function to start game, sets time to 60 seconds and starts the timer countdown 
 function startGame() {
     isGameOver = false; 
     secondsLeft = 60;
+    startBtnEl.disabled = true;
     startTimer();
 }
 
-//starts the timer, sets the interval and counts down with displayed text
-//clears the timer interval when time reaches 0 and shows the modal to indicate the game is over 
+// Starts the timer, sets the interval and counts down with displayed text
+// Clears the timer interval when time reaches 0 and shows the modal to indicate the game is over 
 function startTimer() {
     timer = setInterval(function() {
         secondsLeft--;
@@ -188,53 +183,48 @@ function startTimer() {
     }, 1000);
 };
 
-//UPDATES WINS/LOSSES
+// UPDATES WINS/LOSSES
 
-// functions for storing the wins/counts and setting as the updated count in local storage 
+// Functions for storing the wins/counts and setting as the updated count in local storage 
 function storeScores() {
     localStorage.setItem("winCount", winCount);
     localStorage.setItem("lossCount", lossCount);
 }
 
-// retrieves the stored wins to count and display in the high score modal 
+// Retrieves the stored wins to count and display in the high score modal 
 function getWins() {
     var storedWins = localStorage.getItem("winCount");
-    // ensures there is a stored value, otherwise 0 
+    // Ensures there is a stored value, otherwise 0 
     if (storedWins === null) {
       winCount = 0;
     } else {
-      // updates the stored wins to the number of wins stored in the local storage 
+      // Updates the stored wins to the number of wins stored in the local storage 
       winCount = storedWins;
     }
-    // displays the number of wins on the high score modal 
+    // Displays the number of wins on the high score modal 
     winDisplay.textContent = winCount;
     }
 
-// retrieves the stored losses to count and display in the high score modal 
+// Retrieves the stored losses to count and display in the high score modal 
 function getLosses() {
     var storedLosses = localStorage.getItem("lossCount");
-    // ensures there is a stored value, otherwise 0
+    // Ensures there is a stored value, otherwise 0
     if (storedLosses === null) {
         lossCount = 0;
     } else {
-        // updates the stored losses to the number of losses stored in the local storage 
+        // Updates the stored losses to the number of losses stored in the local storage 
         lossCount = storedLosses;
     }
-    //displasy the number of losses on the high score modal 
+    // Displays the number of losses on the high score modal 
     lossDisplay.textContent = lossCount;
     }
 
-// displays the modal for when the user wins the game 
+// Displays the modal for when the user wins the game 
 function showWinModal() {
     winModalEl.style.display="block";
 }
 
-//closes the win modal for when the user clicks the "X" button 
-winCloseEl.addEventListener ('click',function() {
-    winModalEl.style.display="none";
-  });
-
-// function that runs when the user guesses the correct word and wins the game; increases the win count, clears the interval, stores the score and shows the win modal 
+// Function that runs when the user guesses the correct word and wins the game; increases the win count, clears the interval, stores the score and shows the win modal 
 function gameWin() {
     showMessage('That is the word!')
     winCount++;
@@ -243,7 +233,7 @@ function gameWin() {
     storeScores();
     }
 
-// function that runs when the time either runs out or they use up all attempts without guessing the word; shows game over modal, increases loss count, clears the interval and stores the new score
+// Function that runs when the time either runs out or they use up all attempts without guessing the word; shows game over modal, increases loss count, clears the interval and stores the new score
 function gameLoss() {
     showMessage('Game Over');
     lossCount++;
@@ -252,7 +242,7 @@ function gameLoss() {
     storeScores();
 }
 
-// function runs in order to retrive the number of wins/losses to display 
+// Function runs in order to retrive the number of wins/losses to display 
 function init() {
     getWins();
     getLosses();
@@ -306,23 +296,16 @@ const flipTile = () => {
     })
 }
 
-// TIMER
+// MODALS 
 
-//displays modal either when time is up or all attempts are used 
+// Displays modal either when time is up or all attempts are used 
 function showTimeModal() {
   timeModalEl.style.display="block";
 };
 
-//closes the modal when the "x" is clicked 
-modalCloseEl.addEventListener ('click',function() {
-  timeModalEl.style.display="none";
-});
-
-//start button allows the startGame function to run, allowing for the keyboard to appear, timer to run and game to start
+// Start button allows the startGame function to run, allowing for the keyboard to appear, timer to run and game to start
 startBtnEl.addEventListener('click', startGame)
-
- // High Score modal 
-
+ 
  // opens modal when the high score button is clicked 
  scoreButtonEl.addEventListener ('click',function() {
   scoreModalEl.style.display="block";
@@ -357,39 +340,39 @@ winPlayAgainBtn.addEventListener('click', function() {
 
 // random word API -> randomly selects a word with a length of 4 characters as the word needed to be guessed 
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-	}
-};
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+// 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+// 	}
+// };
 
-fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
-	.then(response => response.json())
-	.then(function (response) {
-            console.log(response[0]);
-            wordIs = response[0].toUpperCase();
-    });
+// fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
+// 	.then(response => response.json())
+// 	.then(function (response) {
+//             console.log(response[0]);
+//             wordIs = response[0].toUpperCase();
+//     });
 
 // console.log(wordIs);
 
 // organize-js
 // // random definition at footer API --> randomly displays a dutch word with translation/definition and dutch pronunciation
 
-const options2 = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
-	}
-};
+// const options2 = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+// 		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
+// 	}
+// };
 
-fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
-	.then(response => response.json())
-	.then(function (response2) {
-        wordDefEl.textContent = JSON.stringify(response2);
-    });
+// fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
+// 	.then(response => response.json())
+// 	.then(function (response2) {
+//         wordDefEl.textContent = JSON.stringify(response2);
+//     });
 
 
 
