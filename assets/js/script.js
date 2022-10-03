@@ -345,7 +345,7 @@ winPlayAgainBtn.addEventListener('click', function() {
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+		'X-RapidAPI-Key': '87bb03a7damsha85facf7a8b1446p1bd54cjsn1ff2cce0d261',
 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
 	}
 };
@@ -363,7 +363,7 @@ fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength
 const options2 = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+		'X-RapidAPI-Key': '87bb03a7damsha85facf7a8b1446p1bd54cjsn1ff2cce0d261',
 		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
 	}
 };
