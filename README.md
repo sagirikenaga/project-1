@@ -6,7 +6,7 @@ The purpose of this project is to work as a development team to create a web app
 
 ## Usage
 
-This README should be used to guide the user into the motivations for this project which include a gathering effort by the development team to implement what we have learned from the course so far into a web application that will be used by users and generate critical feedback. The following links will show the APIs we used, a screenshot of the sketch we based our project off of, a link to the deployed website, and a picture of the deployed project.
+This README should be used to guide the user into the motivations for this project which include a gathering effort by the development team to implement what we have learned from the course so far into a web application that will be used by users and generate critical feedback. The following links will show the APIs we used, a screenshot of the sketch we based our project off of, a link to the deployed website, and a picture of the deployed project. We will also include a demo of our project.
 
 Link of APIs:
 Random Words API: 
@@ -24,3 +24,6 @@ https://github.com/sagirikenaga/whats-the-word/deployments/activity_log?environm
 
 Screenshot of deployment:
 ![Screenshot-2](https://user-images.githubusercontent.com/112971337/193312364-beb82294-583a-4207-a6e9-7d27bfbf6760.png)
+
+Demo:
+[Demo.webm](https://user-images.githubusercontent.com/112971337/193614058-a3d08acc-548b-4f05-a716-7ef2d0143f34.webm)
