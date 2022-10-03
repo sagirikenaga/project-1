@@ -308,7 +308,7 @@ function showTimeModal() {
 // Start button allows the startGame function to run, allowing for the keyboard to appear, timer to run and game to start
 startBtnEl.addEventListener('click', startGame)
  
- // Opens modal when the high score button is clicked 
+// Opens modal when the high score button is clicked 
 scoreButtonEl.addEventListener ('click',function() {
     scoreModalEl.style.display="block";
 });
@@ -318,22 +318,22 @@ scoreCloseEl.addEventListener('click',function() {
     scoreModalEl.style.display="none";
 });
 
- // Opens modal when the help button is clicked 
+// Opens modal when the help button is clicked 
 helpButtonEl.addEventListener ('click',function() {
     helpModalEl.style.display="block";
 });
   
-  // Closes modal when the "x" button is clicked 
+// Closes modal when the "x" button is clicked 
 helpCloseEl.addEventListener('click',function() {
     helpModalEl.style.display="none";
   });
 
-// allows user to play again when "play again" button is clicked; refreshes the page which resets the game and updates the scores 
+// Allows user to play again when "play again" button is clicked; refreshes the page which resets the game and updates the scores 
 playAgainBtnEl.addEventListener('click', function() {
     window.location.reload();
 })
 
-// allows user to play again when "play again" button is clicked; refreshes the page which resets the game and updates the scores 
+// Allows user to play again when "play again" button is clicked; refreshes the page which resets the game and updates the scores 
 winPlayAgainBtn.addEventListener('click', function() {
     window.location.reload();
 })
