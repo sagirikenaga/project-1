@@ -357,7 +357,7 @@ fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength
             console.log(response[0]);
             wordIs = response[0].toUpperCase();
     });
-
+    
 // organize-js
 // random definition at footer API --> randomly displays a dutch word with translation/definition and dutch pronunciation
 
