@@ -18,14 +18,16 @@ var lossDisplay = document.querySelector('#loss-count')
 var playAgainBtnEl = document.querySelector("#play-again-btn")
 var winPlayAgainBtn = document.querySelector("#win-play-again")
 var winModalEl = document.querySelector("#win-modal")
-// var wordIs = "EASY"
 var wordIs = " ";
 var winCount = 0;
 var lossCount = 0;
 var timer;
 var secondsLeft;
+
+// Filler word for low API or testing
+// var wordIs = "EASY"
     
-// ARRAYS & LAYOUT
+// ARRAYS & LAYOUT (Tiles and Keys)
 
 const keys = [
     'Q',
@@ -263,6 +265,7 @@ const addColourToKey = (keyLetter, colour) => {
     const key = document.getElementById(keyLetter)
     key.classList.add(colour)
 }
+
 // Flips tiles while generating colour overlay for correct, wrong, and misplaced letters. 
 const flipTile = () => {
     const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes
@@ -300,29 +303,29 @@ const flipTile = () => {
 
 // Displays modal either when time is up or all attempts are used 
 function showTimeModal() {
-  timeModalEl.style.display="block";
+    timeModalEl.style.display="block";
 };
 
 // Start button allows the startGame function to run, allowing for the keyboard to appear, timer to run and game to start
 startBtnEl.addEventListener('click', startGame)
  
- // opens modal when the high score button is clicked 
- scoreButtonEl.addEventListener ('click',function() {
-  scoreModalEl.style.display="block";
+ // Opens modal when the high score button is clicked 
+scoreButtonEl.addEventListener ('click',function() {
+    scoreModalEl.style.display="block";
 });
 
-//closes modal when the "x" button is clicked 
+// Closes modal when the "x" button is clicked 
 scoreCloseEl.addEventListener('click',function() {
-  scoreModalEl.style.display="none";
+    scoreModalEl.style.display="none";
 });
 
- // opens modal when the help button is clicked 
- helpButtonEl.addEventListener ('click',function() {
+ // Opens modal when the help button is clicked 
+helpButtonEl.addEventListener ('click',function() {
     helpModalEl.style.display="block";
-  });
+});
   
-  //closes modal when the "x" button is clicked 
-  helpCloseEl.addEventListener('click',function() {
+  // Closes modal when the "x" button is clicked 
+helpCloseEl.addEventListener('click',function() {
     helpModalEl.style.display="none";
   });
 
@@ -340,39 +343,37 @@ winPlayAgainBtn.addEventListener('click', function() {
 
 // random word API -> randomly selects a word with a length of 4 characters as the word needed to be guessed 
 
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-// 		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-// 	}
-// };
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+	}
+};
 
-// fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
-// 	.then(response => response.json())
-// 	.then(function (response) {
-//             console.log(response[0]);
-//             wordIs = response[0].toUpperCase();
-//     });
-
-// console.log(wordIs);
+fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=2&wordLength=4', options)
+	.then(response => response.json())
+	.then(function (response) {
+            console.log(response[0]);
+            wordIs = response[0].toUpperCase();
+    });
 
 // organize-js
-// // random definition at footer API --> randomly displays a dutch word with translation/definition and dutch pronunciation
+// random definition at footer API --> randomly displays a dutch word with translation/definition and dutch pronunciation
 
-// const options2 = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
-// 		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
-// 	}
-// };
+const options2 = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '62c6f6566emsh794f8b2c7702c7cp11de96jsn9f8a11c6fe5c',
+		'X-RapidAPI-Host': 'random-words-with-pronunciation.p.rapidapi.com'
+	}
+};
 
-// fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
-// 	.then(response => response.json())
-// 	.then(function (response2) {
-//         wordDefEl.textContent = JSON.stringify(response2);
-//     });
+fetch('https://random-words-with-pronunciation.p.rapidapi.com/word/dutch', options2)
+	.then(response => response.json())
+	.then(function (response2) {
+        wordDefEl.textContent = JSON.stringify(response2);
+    });
 
 
 
