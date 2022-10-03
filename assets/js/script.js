@@ -2,6 +2,9 @@
 const tileDisplay = document.querySelector('.tile-container')
 const keyboard = document.querySelector('.key-container')
 const messageDisplay = document.querySelector('.message-container')
+var helpButtonEl = document.getElementById("help");
+var helpModalEl = document.getElementById("help-modal");
+var helpCloseEl = document.querySelector(".help-modal-close");
 var scoreModalEl = document.getElementById("highscore-modal");
 var scoreCloseEl = document.querySelector(".score-modal-close");
 var scoreButtonEl = document.getElementById("highscore");
@@ -329,6 +332,16 @@ startBtnEl.addEventListener('click', startGame)
 scoreCloseEl.addEventListener('click',function() {
   scoreModalEl.style.display="none";
 });
+
+ // opens modal when the help button is clicked 
+ helpButtonEl.addEventListener ('click',function() {
+    helpModalEl.style.display="block";
+  });
+  
+  //closes modal when the "x" button is clicked 
+  helpCloseEl.addEventListener('click',function() {
+    helpModalEl.style.display="none";
+  });
 
 // allows user to play again when "play again" button is clicked; refreshes the page which resets the game and updates the scores 
 playAgainBtnEl.addEventListener('click', function() {
