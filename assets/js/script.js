@@ -179,8 +179,7 @@ function startTimer() {
         showKeyboard();
 
         if(secondsLeft === 0) { 
-            clearInterval(timer);
-            showTimeModal();
+           gameLoss();
           };
     }, 1000);
 };
