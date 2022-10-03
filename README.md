@@ -10,20 +10,26 @@ This README should be used to guide the user into the motivations for this proje
 
 Link of APIs:
 Random Words API: 
+
 https://rapidapi.com/sheharyar566/api/random-words5/?utm_source=ANIA-KUBOW&utm_medium=DevRel&utm_campaign=DevRel
 
 Random Words with Pronunciation: 
+
 https://rapidapi.com/mcnaveen/api/random-words-with-pronunciation/
 
 Wireframe:
+
 ![Screenshot-1](https://user-images.githubusercontent.com/112971337/193312353-3d111203-ba95-4baf-9281-8310748291ca.png)
 
 
 Link to deployedment of project:
+
 https://github.com/sagirikenaga/whats-the-word/deployments/activity_log?environment=github-pages
 
 Screenshot of deployment:
+
 ![Screenshot-2](https://user-images.githubusercontent.com/112971337/193312364-beb82294-583a-4207-a6e9-7d27bfbf6760.png)
 
 Demo:
+
 [Demo.webm](https://user-images.githubusercontent.com/112971337/193614058-a3d08acc-548b-4f05-a716-7ef2d0143f34.webm)
